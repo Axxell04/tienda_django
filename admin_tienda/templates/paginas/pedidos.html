@@ -1,0 +1,125 @@
+{% extends "base_admin.html" %}
+
+{% block titulo %} Admin Pedidos {% endblock %}
+
+{% block contenido %}
+
+    <script>
+        window.CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+
+    <div class="container">
+        <div id="pedidos-pendientes" class="active">
+            
+        </div>
+
+        <div id="pedidos-realizados">
+
+        </div>
+
+        <div id="pedidos-rechazados">
+
+        </div>
+
+        <div id="editar-pedidos">
+            
+        </div>
+
+    </div>
+
+    <div id="barra-inferior">
+        <div class="barra-rechazados">
+            <div class="barra-icono-pedidos">
+                <ion-icon name="bag-remove"></ion-icon>
+                <span class="num-rechazados"></span>
+            </div>
+            <div class="barra-texto">
+                <span>Rechazados</span>
+            </div>
+        </div>
+        <div class="barra-pendientes">
+            <div class="barra-icono-pedidos">
+                <ion-icon name="bag"></ion-icon>
+                <span class="num-pendientes"></span>
+            </div>
+            <div class="barra-texto">
+                <span>Pendientes</span>
+            </div>
+        </div>
+        <div class="barra-realizados">
+            <div class="barra-icono-pedidos">
+                <ion-icon name="bag-check"></ion-icon>
+                <span class="num-realizados"></span>
+            </div>
+            <div class="barra-texto">
+                <span>Realizados</span>
+            </div>
+        </div>
+
+    </div>
+
+    <template id="template-pedido">
+        <div class="pedido">
+            <div class="cliente">
+                <div class="nombre"> <h3>CLIENTE</h3></div>
+                <button class="btn-editar-pedido"><ion-icon class="btn-editar-pedido-icono" name="pencil"></ion-icon></button>
+                <a id="btn-contactar">
+                    <div class="celular"> <h3>CONTACTO</h3></div>
+                </a>
+            </div>
+            
+            <div class="fecha">
+                <span></span>
+            </div>
+
+            <div id="contenedor-productos">
+                
+            </div>
+
+            <div class="pedido-info">
+                <div class="productos-totales"><h4>Productos Totales</h4> <span>3</span> </div>
+                <div class="precio-total"><h4>Precio Total</h4> <span>1835$</span> </div>
+            </div>
+
+            <div class="pedido-acciones">
+                <div class="cancelar">
+                    <button class="btn-cancelar btn-1">CANCELAR</button>
+                </div>
+                <div class="editar">
+                    <button class="btn-enviar-edicion btn-2">EDITAR</button>
+                </div>
+                <div class="rechazar">
+                    <button class="btn-rechazar btn-1">RECHAZAR</button>
+                </div>
+                <div class="aceptar">
+                    <button class="btn-realizado btn-2">REALIZADO</button>
+                </div>
+                <div class="deshacer">
+                    <button class="btn-deshacer btn-3">DESHACER</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="template-producto">
+        <div class="producto">
+            <div class="id-p"><h4>ID: 1</h4></div> 
+            <div class="nombre-p"><h4>NOMBRE</h4> <span>Redmi 9</span></div> 
+            <div class="cantidad-p"><h4>CANTIDAD</h4> <span>2</span> </div> 
+            <div class="precio-p"><h4>PRECIO</h4> <span>185$</span> </div>
+        </div>
+
+    </template>
+
+    <template id="template-producto-editar">
+        <div class="editar-producto">
+            <div class="id-p"><h4>ID: 1</h4></div>
+            <div class="nombre-p"><h4>NOMBRE</h4> <span></span></div> 
+            <!-- <div class="cantidad-p"><h4>CANTIDAD</h4> <span>2</span> </div>  -->
+            <label for="cantidad-p">CANTIDAD</label>
+            <input type="number" name="cantidad-p" id="cantidad-p">
+            <div class="precio-p"><h4>PRECIO</h4> <span></span> </div>            
+        </div>
+    </template>
+
+    <script src="/admin_tienda/scripts/pedidos.js"></script>
+{% endblock %}

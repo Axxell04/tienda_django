@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block titulo %} Carrito {% endblock %}
+
+{% block contenido %}
+
+<div id="contenedor-mensaje">
+    <div class="mensaje-compra">
+        <span> Su pedido a sido ralizado con exito, nos comunicaremos con usted en las proximas horas </span>
+        <button id="ir-inicio"> <a href="/"> Ir a Inicio <ion-icon name="home-outline"></ion-icon> </a> </button>
+        
+    </div>
+
+</div>
+
+
+<script>
+    window.CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+
+<div class="contenedor-carrito">
+    <div id="carrito">
+        
+    </div>
+    <div id="footer">
+
+    </div>
+    <div class="carrito-opciones">
+        <button class="btnVaciar btnAmarillo">Limpiar Carrito</button>
+        <button class="btnPedir btnMorado">Realizar Pedido</button>
+    </div>
+</div>
+
+<template id="template-carrito">
+    <div class="producto">
+        <div class="producto-info">
+            <div class="texto">
+                <h2 class="nombreC"></h2>
+                <p class="detallesC"></p>
+                <div class="Colores"><h5>Colores </h5><p class="colorC"></p></div>
+                <div class="Precio"><h5>Precio </h5><p class="precioC"></p></div>
+                <!-- <h5 class="cantidadC"></h5> -->
+            </div>
+            <div>
+                <img src="" alt="">
+            </div>
+        </div>
+        <div id="producto-opciones">
+            <div class="bordes">
+                <h3>Cantidad</h3>
+                <h5 class="cantidadC"></h5>
+            </div>
+            <div>
+                <button class="btnSumar btnAmarillo">+</button>
+                <button class="btnRestar btnMorado">-</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="template-footer">
+    <div class="productos-carrito">
+        <h2>Productos en Carrito</h2>
+        <h4 class="total-productos"></h4>
+    </div>
+    <div class="precioT-carrito">
+        <h2>Precio Total</h2>
+        <h4 class="total-precio"></h4>
+    </div>
+</template>
+
+<div id="form" class="form oculto">
+    <div class="form-container">
+        <ul>
+            <li>
+                <label for="nombre">NOMBRE</label>
+                <input type="text" maxlength="60" name="nombre" id="nombre" autocomplete="off">
+            </li>
+            <li>
+                <label for="celular">CELULAR</label>
+                <input type="tel" maxlength="10" name="celular" id="celular" autocomplete="off">
+            </li>
+            <li>
+                <button type="submit" id="enviar" class="btnAmarillo">Enviar</button>                
+                <button id="cancelar" class="btnMorado">Cancelar</button>
+            </li>
+            <li>
+                <span id="validacion"></span>
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+
+<div class="scripts">
+
+</div>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/tienda_app/node_modules/hammerjs/hammer.min.js"></script> -->
+<script src="/tienda_app/scripts/carrito.js"></script>
+
+{% endblock%}

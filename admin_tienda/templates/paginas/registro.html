@@ -1,0 +1,36 @@
+{% extends "base_admin.html" %}
+
+{% block titulo %} Eliminar Usuario {% endblock %}
+
+{% block contenido %}
+    <script>
+        window.API_TOKEN = '{{ token }}';
+    </script>
+
+    <div class="container">
+        <div id="contenedor-form-register">
+            <form id="form-register">
+                {% csrf_token %}
+                <div class="form-nombre-usuario">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" id="username" name="username" placeholder="Nombre de Usuario">
+                </div>
+                <div class="form-contraseña">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="Contraseña">
+                </div>
+                <div class="form-contraseña-confirm">
+                    <label for="password">Confirmar Contraseña</label>
+                    <input type="password" id="password-confirm" name="password-confirm" placeholder="Contraseña">
+                    <span> Las contraseñas no coinciden </span>
+                </div>
+                
+            </form>
+            <button id="btn-register" class="btn-3">Registar Usuario</button>
+
+        </div>
+    </div>
+
+    <script src="/admin_tienda/scripts/register.js"></script>
+
+{% endblock %}

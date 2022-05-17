@@ -1,0 +1,30 @@
+{% extends "base_admin.html" %}
+
+{% block titulo %} Eliminar Usuario {% endblock %}
+
+{% block contenido %}
+
+    <div class="container">
+        <div id="contenedor-users">
+
+        </div>
+    </div>
+
+    <template id="template-user">
+        <li>
+            <div class="user">
+                <div class="user-info">
+                    <h3 class="user-name"></h3>
+                    <span class="user-rango"></span>
+                    <span class="user-UC"></span>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-user-delete btn-1">Eliminar</button>
+                </div>
+            </div>
+
+        </li>
+    </template>
+
+    <script src="/admin_tienda/scripts/users.js"></script>
+{% endblock %}

@@ -1,0 +1,197 @@
+{% extends "base_admin.html" %}
+
+{% block titulo %} {% endblock %}
+
+{% block contenido %}
+    <script>
+        window.CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+
+    <div class="container">
+        
+        <div id="tabla-productos" class="active">
+
+        </div>
+
+        <div id="editar-productos">            
+            <div class="form-busqueda">
+                <label for="busqueda">ID del producto</label>
+                <input type="text" name="busqueda" id="busqueda" autocomplete="off">
+                <button id="btnE-buscar"><ion-icon name="search"></ion-icon></button>
+                    
+            </div>
+            
+            <div id="msg-no-encontrado">
+                <h2>Producto No Encontrado</h2>
+            </div>
+
+            <div id="barra-edicion">
+                
+                <form class="form-editor" action="" method="" enctype="multipart/form-data">
+                    <div class="form-nombre">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre-E" autocomplete="off" autocomplete="off">
+                    </div>
+                    
+                    <div class="form-descripcion">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" name="descripcion" id="descripcion-E" autocomplete="off">
+                    </div>
+
+                    <div class="form-categoria">
+                        <label for="categoria">Categoría</label>
+                        <input type="text" name="categoria" id="categoria-E" autocomplete="off" list="categorylist" >
+                        <datalist id="categorylist">
+                            <option value="Accesorios">
+                            <option value="Ropa">
+                            <option value="Tecnología">
+                            <option value="Productos Varios">
+                        </datalist>
+                    </div>
+    
+                    <div class="form-colores">
+                        <label for="colores">Colores</label>
+                        <input type="text" name="colores" id="colores-E" autocomplete="off" autocomplete="off">
+                    </div>
+    
+                    <div class="form-estado">
+                        <label for="estado">Estado</label>
+                        <input type="text" name="estado" id="estado-E" autocomplete="off" autocomplete="off" list="estadolist">
+                        <datalist id="estadolist">
+                            <option value="Nuevo">
+                            <option value="Semi-Nuevo"></option>
+                            <option value="Usado">
+                        </datalist>
+                    </div>
+    
+                    <div class="form-precio">
+                        <label for="precio">Precio</label>
+                        <input type="number" name="precio" id="precio-E" autocomplete="off" autocomplete="off">
+                    </div>
+    
+                    <div class="form-stock">
+                        <label for="stock">Stock</label>
+                        <input type="number" name="stock" id="stock-E" autocomplete="off" autocomplete="off">
+                    </div>
+    
+                    <div class="form-img">
+                        <label for="img">Actualizar Imagen</label>
+                        <input type="file" name="img" id="img-E" autocomplete="off" accept="image/*" autocomplete="off">
+                    </div>
+
+                    <div class="img-actual">
+                        <img src="" alt="">
+                    </div>
+                    
+                    
+                </form>
+                <div class="container-btn-enviar">
+                    <button id="btnE-Enviar" class="btn-2">Editar</button>
+                </div>
+                <div class="container-btn-eliminar">
+                    <button id="btn-Eliminar" class="btn-1">Eliminar</button>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div id="añadir-productos">
+            <div id="barra-añadir">
+                <form class="form-añadir" action="" method="" enctype="multipart/form-data">
+                    <div class="form-nombre">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre-A" autocomplete="off">
+                    </div>
+                    
+                    <div class="form-descripcion">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" name="descripcion" id="descripcion-A" autocomplete="off">
+                    </div>
+
+                    <div class="form-categoria">
+                        <label for="categoria">Categoría</label>
+                        <input type="text" name="categoria" id="categoria-A" autocomplete="off" list="categorylist" >
+                        <datalist id="categorylist">
+                            <option value="Accesorios">
+                            <option value="Ropa">
+                            <option value="Tecnología">
+                            <option value="Productos Varios">
+                        </datalist>
+                    </div>
+    
+                    <div class="form-colores">
+                        <label for="colores">Colores</label>
+                        <input type="text" name="colores" id="colores-A" autocomplete="off">
+                    </div>
+    
+                    <div class="form-estado">
+                        <label for="estado">Estado</label>
+                        <input type="text" name="estado" id="estado-A" autocomplete="off" list="estadolist">
+                        <datalist id="estadolist">
+                            <option value="Nuevo">
+                            <option value="Semi-Nuevo">
+                            <option value="Usado">
+                        </datalist>
+                    </div>
+    
+                    <div class="form-precio">
+                        <label for="precio">Precio</label>
+                        <input type="number" name="precio" id="precio-A" autocomplete="off">
+                    </div>
+    
+                    <div class="form-stock">
+                        <label for="stock">Stock</label>
+                        <input type="number" name="stock" id="stock-A" autocomplete="off">
+                    </div>
+    
+                    <div class="form-img">
+                        <label for="img">Agregar Imagen</label>
+                        <input type="file" name="img" id="img-A" autocomplete="off" accept="image/*">
+                    </div>
+    
+                    <div class="img-producto">
+                        <img src="" alt="">
+                    </div>
+        
+                </form>
+                <div class="container-btn-enviar">
+                    <button id="btnA-Enviar" class="btn-2">Añadir</button>
+                </div>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+
+    <div id="barra-inferior">
+        <div class="barra-productos-editar">
+            <div class="barra-icono-productos">
+                <ion-icon name="pencil-sharp"></ion-icon>
+            </div>
+            <div class="barra-texto">
+                <span>Editar</span>
+            </div>
+        </div>
+        <div class="barra-productos-stock">
+            <div class="barra-icono-productos">
+                <ion-icon name="storefront"></ion-icon>
+                <span class="num-productos-stock"></span>
+            </div>
+            <div class="barra-texto">
+                <span>Stock</span>
+            </div>
+        </div>
+        <div class="barra-productos-añadir">
+            <div class="barra-icono-productos">
+                <ion-icon name="add-circle"></ion-icon>
+            </div>
+            <div class="barra-texto">
+                <span>Añadir</span>
+        </div>
+    </div>
+
+    <script src="/admin_tienda/scripts/productos.js"></script>
+{% endblock %}

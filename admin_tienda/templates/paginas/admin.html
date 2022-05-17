@@ -1,0 +1,36 @@
+{% extends "base_admin.html" %}
+
+{% block titulo %} Admin {% endblock %}
+
+{% block contenido %}
+
+<div class="container">
+    <div class="seccion-pendientes secciones">
+        <h2>Pedidos Pendientes</h2> 
+        <div>
+            <ion-icon name="mail-unread-outline"></ion-icon>
+            <h3></h3>
+        </div>
+
+    </div>
+    <div class="seccion-stock secciones">
+        <h2>Productos en Stock</h2> 
+        <div>
+            <ion-icon name="server-sharp"></ion-icon>
+            <h3></h3>
+        </div>
+
+    </div>
+    <div class="seccion-ventas secciones">
+        <h2>Ventas <ion-icon name="cash-sharp"></ion-icon></h2> 
+        <div>
+            <h3></h3>
+        </div>
+
+    </div>
+    
+    
+</div>
+
+<script src="/admin_tienda/scripts/admin.js"></script>
+{% endblock %}

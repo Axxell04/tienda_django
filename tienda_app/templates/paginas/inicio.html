@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block titulo %} Inicio {% endblock %}
+
+{% block contenido %}
+
+<div id="msg-añadido">
+    <div class="msg">
+        Producto Añadido al Carrito
+    </div>
+</div>
+
+<div class="contenedor-cards">
+
+</div>
+<br>
+<div class="paginacion">
+    <div class="menu-pag">
+        <button class="btnAnterior btnAmarillo">Anterior</button>
+
+        <button class="btnSiguiente btnMorado">Siguiente</button>
+
+    </div>
+</div>
+
+
+<template id="template-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="imagen"> 
+                <img src="" width="200">                
+                <div id="detalles">
+                    <div class="cont">
+                        <div>
+                            <h5>PRECIO: </h5> <p class="precio"></p>
+                        </div>
+                        <div>
+                            <h5>DESCRIPCIÓN: </h5> <p class="descripcion"></p>
+                        </div>
+                        <div>
+                            <h5>COLORES: </h5> <p class="color"></p>
+                        </div>
+                        <div>
+                            <h5>STOCK: </h5> <p class="stock"></p>
+                        </div>
+                        <div>
+                            <h5>ESTADO: </h5> <p class="estado"></p>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="card-texto">
+                <h4>Nombre</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div>
+                <button class="card-btn-agregar btnAmarillo">Agregar</button>
+            </div>
+            <div>
+                <button class="card-btn-detalles btnMorado">Detalles</button>
+            </div>
+
+
+        </div>
+    </div>
+</template>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="/tienda_app/scripts/main.js"></script>
+
+{% endblock %}

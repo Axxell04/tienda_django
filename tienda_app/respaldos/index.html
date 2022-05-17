@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block titulo %} Inicio {% endblock %}
+
+{% block contenido %}
+
+<div class="p-5 bg-light">
+    <div class="container">
+        <h1 class="display-3">Bienvenidos a mi Tienda en Línea</h1>
+        <p class="lead">¿Quienes Somos?</p>
+        <hr class="my-2">
+    
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Más información</a>
+        </p>
+    </div>
+</div>
+<br>
+<div class="cards-bordes">
+<script>
+    var tarjetas = 0
+</script>
+{% for producto in productos %}
+
+<br>
+
+<div class="cards"> 
+    <div class="cards-body">
+        <img src="{{ producto.imagen.url }}" width="200">
+        <div class="cards-texto">
+            <h4>{{ producto.nombre }}</h4>
+            <p>{{ producto.descripcion }}</p>
+        </div>
+    </div>
+    <div class="cards-footer">
+        <div class="cards-btn-agregar">
+            <a href="#">Agregar</a>
+        </div>
+        <div class="cards-btn-info">
+            <a href="#">Detalles</a>
+        </div>
+            
+    </div>
+</div>
+<div class="separador">
+    <script>
+        tarjetas = tarjetas + 1
+        if (tarjetas == 2){
+            document.write("<h1>. </h1>")
+            
+            tarjetas = 0
+        }
+        
+    </script>
+</div>
+
+<script src="/tienda_app/scripts/main.js"></script>
+
+{% endfor %}
+
+<div class="tope"></div>
+</div>
+{% endblock %}
+
+
+<!-- Navegación -->
+<nav class="navegacion">
+    <div></div>
+    <div class="menunav_izquierda">
+      <ul>
+        <li><a href="">Inicio</a></li>
+        <li><a href="">Categorías</a></li>
+        <li><a href="">Nosotros</a></li>
+      </ul>
+    </div>
+
+    <div id="menunav_derecha" class="replegado">
+      <div class="contenedor-carrito">
+        
+      </div>
+      <button> <img class="abrir-carrito" src="/iconos/carrito.png"> </button>
+    </div>
+
+  </nav>

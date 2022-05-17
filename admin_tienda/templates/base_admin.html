@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block titulo %} {% endblock %} </title>
+    <link rel="stylesheet" href="/admin_tienda/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        window.API_TOKEN = '{{ token }}';
+        window.CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+    <div class="lineas">
+        <div class="linea"></div> <div class="linea2"></div> <div class="linea3"></div> <div class="linea4"></div>
+
+    </div>
+    <div id="barra-lateral" class="">
+        <div id="container-user">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <span>{{ user }}</span>
+        </div>
+
+        <div id="container-options-user">
+            {% if is_superuser == True %}
+            <a href="/admin/registro/">
+                <ion-icon name="person-add-outline"></ion-icon>
+                <span> Nuevo Usuario </span>
+            </a>
+            <a href="/admin/eliminar_usuario/">
+                <ion-icon name="person-remove-outline"></ion-icon>
+                <span> Eliminar Usuario </span>
+            </a>
+            {% endif %}
+        </div>
+
+        <ul>
+            <li><ion-icon class="inicio-ico" name="home-outline"></ion-icon><a id="nav-inicio" class="nav">Inicio</a></li>
+            <li><ion-icon class="pedidos-ico" name="cart-outline"></ion-icon><a id="nav-pedidos" class="nav"> Pedidos </a></li>
+            <li><ion-icon class="productos-ico" name="storefront-outline"></ion-icon><a id="nav-productos" class="nav">Productos</a></li>
+        </ul>
+
+        <div id="container-cerrar-sesion">
+            <a id="cerrar-sesion" href="/accounts/logout/">
+                <ion-icon name="log-out-sharp"></ion-icon>
+                <span> Cerrar Sesión </span>
+            </a>
+        </div>
+
+    </div>
+
+    {% block contenido %} {% endblock %}
+    <script type="module">
+        import hammerjs from 'https://cdn.skypack.dev/hammerjs';
+
+        let hammer = new Hammer(document.body)
+        // const hammerBarra = new Hammer(document.getElementById('barra-lateral'))
+
+        //Funcion que bloquea el scroll de dispositivos moviles
+
+        // hammerBarra.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+
+
+        hammer.on('swipeleft', () => {
+            if (window.screen.width < 600 | window.innerWidth < 600) {
+                barraLateral.className = '';
+                
+
+            }
+        })
+
+        hammer.on('swiperight', () => {
+            if (window.screen.width < 600 | window.innerWidth < 600) {
+                // nav.className = 'nav-movil-ocultar';
+                barraLateral.className = 'active';
+                
+            }
+        })
+    </script>
+    
+    <script src="/admin_tienda/scripts/main.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
