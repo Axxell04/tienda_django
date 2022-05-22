@@ -35,18 +35,31 @@ let btnEditarPedido;
 pedidosPendientes.addEventListener('click', (e) => {
     actualizarPedidos(e);
     editarPedido(e);
-    copiarNum(e);
 });
 pedidosRealizados.addEventListener('click', (e) => {
     actualizarPedidos(e);
 });
 pedidosRechazados.addEventListener('click', (e) => {
     actualizarPedidos(e);
+    limpiarPedidos(e);
 });
 vistaEditarPedido.addEventListener('click', (e) => {
     
     opcionesEdicion(e);
 });
+
+
+let redireccionVentas = false;
+if (localStorage.getItem('seccion') === 'ventas') {
+    redireccionVentas = true;
+}
+
+if (redireccionVentas === true) {
+    pedidosPendientes.classList.remove('active');
+    pedidosRealizados.classList.add('active');
+    redireccionVentas = false;
+    localStorage.removeItem('seccion');
+}
 
 
 
@@ -126,22 +139,6 @@ const establecerFocus = () =>{
     }
 }
 
-let limite = 0
-// const copiarNum = async(e) => {
-    
-//     if (e.target.parentElement.classList.contains('celular')) {
-//         if(e.target.localName !== 'input'){
-//             const celularP = e.target.parentElement.querySelector('p')
-//             const celularF = e.target.parentElement.querySelector('input')
-
-
-//             celularP.classList.toggle('active');
-//             celularF.classList.toggle('active');
-//         }   
-//     }
-
-//     e.stopPropagation();
-// }
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarPedidos();
@@ -151,6 +148,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // });
 });
+
+const limpiarPedidos = async(e) => {
+    if (e.target.classList.contains('icon-eliminar')){
+        try {
+            const res = await fetch('/api/pedidos/', {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': window.CSRF_TOKEN,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${window.API_TOKEN}`
+                }
+            })
+            const data = await res.json();
+            if (data.message === 'Success') {
+                alert('Pedidos rechazados eliminados');
+                window.location.reload();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
 const opcionesEdicion = (e) => {
     if (e.target.classList.contains('btn-cancelar')) {
@@ -575,8 +594,9 @@ const pintarPedidos = (pedidos) => {
     
 
     numPendientes.innerHTML = pedidosPendientes.firstElementChild.childElementCount;
-    numRechazados.innerHTML = pedidosRechazados.firstElementChild.childElementCount;
+    numRechazados.innerHTML = pedidosRechazados.firstElementChild.nextElementSibling.childElementCount;
     numRealizados.innerHTML = pedidosRealizados.firstElementChild.childElementCount;
+    
     
 }
 
@@ -665,7 +685,7 @@ const pintarPedidoID = (pedidos, id) => {
     
 
     numPendientes.innerHTML = pedidosPendientes.firstElementChild.childElementCount;
-    numRechazados.innerHTML = pedidosRechazados.firstElementChild.childElementCount;
+    numRechazados.innerHTML = pedidosRechazados.firstElementChild.nextElementSibling.childElementCount;
     numRealizados.innerHTML = pedidosRealizados.firstElementChild.childElementCount;
     
 }

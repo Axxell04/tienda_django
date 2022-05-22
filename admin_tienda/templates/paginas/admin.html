@@ -5,29 +5,88 @@
 {% block contenido %}
 
 <div class="container">
-    <div class="seccion-pendientes secciones">
-        <h2>Pedidos Pendientes</h2> 
-        <div>
-            <ion-icon name="mail-unread-outline"></ion-icon>
-            <h3></h3>
+    <div id="secciones-principales" class="active">
+        <div class="seccion-pendientes secciones">
+            <h2>Pedidos Pendientes</h2> 
+            <div>
+                <ion-icon name="mail-unread-outline"></ion-icon>
+                <h3></h3>
+            </div>
+    
+        </div>
+        <div class="seccion-stock secciones">
+            <h2>Productos en Stock</h2> 
+            <div>
+                <ion-icon name="server-sharp"></ion-icon>
+                <h3></h3>
+            </div>
+    
+        </div>
+        <div id="seccion-cuentas">
+            <div class="seccion-ventas secciones">
+                <h2>Ventas</h2> 
+                <div>
+                    <h3></h3>
+                </div>
+            </div>
+            <div class="seccion-costos secciones">
+                <h2>Costos</h2> 
+                <div>
+                    <h3></h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seccion-ganancias secciones">
+            <h2>Ganancias</h2> 
+            <div>
+                <h3></h3>
+            </div>
         </div>
 
     </div>
-    <div class="seccion-stock secciones">
-        <h2>Productos en Stock</h2> 
-        <div>
-            <ion-icon name="server-sharp"></ion-icon>
-            <h3></h3>
+
+    <div id="seccion-agregar-costos" class="secciones">
+        <ion-icon name="file-tray-full-outline" class="btn-historial-costos"></ion-icon>
+        <h2>Agregar Costos</h2>        
+        <div class="costos-valor">
+            <label for="valor">Valor</label>
+            <input type="number" id="valor" name="valor" placeholder="$$$" autocomplete="off" >
+        </div>
+        <div class="costos-detalles">
+            <label for="detalles">Detalles</label>
+            <textarea name="detalles" id="detalles" placeholder="Detalles del desembolso"></textarea>
         </div>
 
+        <button class="btn-agregar-costos btn-2">Agregar</button>
     </div>
-    <div class="seccion-ventas secciones">
-        <h2>Ventas <ion-icon name="cash-sharp"></ion-icon></h2> 
-        <div>
-            <h3></h3>
-        </div>
 
+    <div id="seccion-historial-costos" class="secciones">
+        <ion-icon name="close-sharp" class="cerrar"></ion-icon>
+        <h2>Historial de Costos</h2>
+        <div class="historial-costos">
+            
+    
+        </div>
     </div>
+
+    <template id="template-registro">
+        <div id="registro-costos" class="secciones">
+            <div class="registro-costos-fecha">
+                <h3>Fecha</h3>
+                <span>20/05/2022</span>
+            </div>
+            <div class="registro-costos-valor">
+                <h3>Valor</h3>
+                <span>$ 25.78</span>
+            </div>
+            <div class="registro-costos-detalles">
+                <h3>Detalles</h3>
+                <span></span>
+            </div>
+            <ion-icon name="trash-outline" class="icon-eliminar"></ion-icon>
+        </div>
+    </template>
     
     
 </div>

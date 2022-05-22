@@ -47,3 +47,9 @@ class Pedido(models.Model):
 
     def ganancias(self):
         return self.precioTotal
+
+class Costos(models.Model):
+    id=models.AutoField(primary_key=True)
+    valor=models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Costos', default=0)
+    fecha=models.CharField(max_length=60, verbose_name='Fecha', null=True)
+    detalles=models.TextField(verbose_name='Detalles', null=True)

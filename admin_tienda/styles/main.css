@@ -51,7 +51,8 @@
     #barra-lateral {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows:.2fr .1fr .6fr .2fr;
+        /* grid-template-rows:.2fr .1fr .6fr .2fr; */
+        grid-template-rows: 90px 150px 1fr 70px 70px;
         align-items: center;
         position: fixed;
         width: 200px;
@@ -122,7 +123,7 @@
         align-items: center;
     }
 
-    #barra-lateral #container-cerrar-sesion {
+    #barra-lateral #container-cerrar-sesion,#container-ir-tienda {
         display: grid;
         grid-template-columns: 1fr;
         align-items: center;
@@ -138,7 +139,17 @@
         grid-template-columns: 1fr;
         align-items: center;
         justify-items: center;
-    } #barra-lateral ion-icon {
+    }
+    #barra-lateral #ir-tienda {
+        text-decoration: none;
+        color: rgba(28, 240, 134, 0.9);
+        font-size: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+    }
+    #barra-lateral ion-icon {
         font-size: 35px;
     }
 
@@ -208,12 +219,13 @@
         align-items: center;
     }
 
-    /* .seccion-pendientes {
-        display: grid;
-        grid-template-columns: 1fr .2fr;
-        justify-items: center;
-        align-items: center;
-    }  */
+    #secciones-principales {
+        display: none;
+    }
+    #secciones-principales.active {
+        display: contents;
+    }
+
     .secciones div {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -224,8 +236,14 @@
     .secciones div h3 { font-size: 23px;}    
     .secciones div ion-icon { font-size: 30px; color: #520172;}
 
+    #seccion-cuentas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 10px;
+    }
     .seccion-ventas {
-        background-color: rgba(67, 255, 108, 0.418);
+        background-color: rgba(99, 236, 129, 0.342);
         display: grid;
         grid-template-columns: 1fr;
         align-self: center;
@@ -238,7 +256,133 @@
         align-self:flex-end;
     } 
     .seccion-ventas h2 { padding-bottom: 20px; }
-    .seccion-ventas h2 ion-icon { color: #520172; }
+
+    .seccion-costos {
+        background-color: rgba(255, 89, 67, 0.295);
+        display: grid;
+        grid-template-columns: 1fr;
+        align-self: center;
+    } .seccion-costos div {
+        /* width: 100%; */
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    } .seccion-costos div h2 {
+        align-self:flex-end;
+    } 
+    .seccion-costos h2 { padding-bottom: 20px; }
+
+    .seccion-ganancias {
+        background-color: rgba(2, 245, 55, 0.418);
+        display: grid;
+        grid-template-columns: 1fr;
+        align-self: center;
+    } .seccion-ganancias div {
+        /* width: 100%; */
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    } .seccion-ganancias div h2 {
+        align-self:flex-end;
+    } 
+    .seccion-ganancias h2 { padding-bottom: 20px; }
+
+    #seccion-agregar-costos {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        position: relative;
+    } #seccion-agregar-costos.active {
+        display: grid;
+    }
+    #seccion-agregar-costos ion-icon {
+        font-size: 35px;
+        color: #520172;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px;
+    }
+    #seccion-agregar-costos h2 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    #seccion-agregar-costos div {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    #seccion-agregar-costos .costos-detalles{
+        grid-row-start: 2;
+        grid-row-end: 4;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 30px 1fr;
+    }
+    #seccion-agregar-costos .costos-detalles textarea {
+        height: calc(100% - 15px);
+        width: calc(100% - 15px);
+        resize: none;
+        border: none;
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+    
+    }
+
+    #seccion-historial-costos {
+        position: relative;
+        display: none;
+        grid-template-columns: 1fr;
+        grid-template-rows: 40px 1fr;
+        gap: 5px;
+        overflow-y: scroll;
+    } #seccion-historial-costos.active {
+        display: grid;
+    }
+    #seccion-historial-costos ion-icon {
+        font-size: 35px;
+        color: #520172;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px;
+    }
+    #seccion-historial-costos .historial-costos {
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+    #seccion-historial-costos .historial-costos #registro-costos {
+        position: relative;
+        background: rgba(110, 243, 188, 0.288);        
+        margin: 10px;
+    }
+    #seccion-historial-costos .historial-costos #registro-costos div {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    #seccion-historial-costos .historial-costos .registro-costos-valor span::before {
+        content: "$ ";
+    }
+    #seccion-historial-costos .historial-costos #registro-costos .registro-costos-detalles {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        border-top: 2px solid rgb(8, 79, 82);
+        padding: 5px;
+    }
+    #seccion-historial-costos .historial-costos #registro-costos .icon-eliminar
+    {
+        position: absolute;
+        right: 0;
+        top: calc(100% - 50px);
+        color: rgba(167, 18, 18, 0.74);
+        font-size: 30px;
+    }
 
     /* *********************************** */
     /* *********    ICONOS        ******** */
@@ -308,6 +452,17 @@
     }
     #pedidos-rechazados.active {
         display: grid;
+    }
+    #pedidos-rechazados .icon-eliminar
+    {
+        position: fixed;
+        padding: 5px;
+        right: calc(50% - 25px);
+        top: 0;
+        color: rgba(167, 18, 18, 0.74);
+        font-size: 30px;
+        background-color: #f0ecec;
+        border-radius: 50%;
     }
 
     #editar-pedidos {
