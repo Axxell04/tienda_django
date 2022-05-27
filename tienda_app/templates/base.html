@@ -21,6 +21,14 @@
 
     </div>
 
+    <button id="btn-busqueda" data-icono="lupa">
+      <ion-icon name="search"></ion-icon>
+    </button>
+
+    <div class="container-input-busqueda">
+      <input type="text" id="input-busqueda" placeholder="Buscar..." class="myinput">
+    </div>
+
     <nav id="navegacion">
       <div class="menunav_login">
         <a id="btn-ir-login" href="/admin/"></a>
@@ -81,20 +89,32 @@ hammerNav.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
 hammer.on('swipeleft', () => {
     const nav = document.querySelector('#navegacion')
+    const btnBusqueda = document.querySelector('#btn-busqueda')
+    const containerInputBusqueda = document.querySelector('.container-input-busqueda')
+    let iconoLupa = `<ion-icon name="search"></ion-icon>`
     
     if (window.screen.width < 600 | window.innerWidth < 600) {
-        // nav.classList.toggle('active');
-        nav.className = 'active';
-
+      // nav.classList.toggle('active');
+      nav.className = 'active';
+      btnBusqueda.className = 'active';
+      containerInputBusqueda.classList.remove('active');
+      btnBusqueda.innerHTML = iconoLupa;
+      btnBusqueda.setAttribute('data-icono', 'lupa')
     }
 })
 
 hammer.on('swiperight', () => {
     const nav = document.querySelector('#navegacion')
+    const btnBusqueda = document.querySelector('#btn-busqueda')
+    const containerInputBusqueda = document.querySelector('.container-input-busqueda')
+    let iconoLupa = `<ion-icon name="search"></ion-icon>`
+
     if (window.screen.width < 600 | window.innerWidth < 600) {
-
-        nav.className = '';
-
+      nav.className = '';
+      btnBusqueda.className = '';
+      containerInputBusqueda.classList.remove('active');
+      btnBusqueda.innerHTML = iconoLupa;
+      btnBusqueda.setAttribute('data-icono', 'lupa')
     }
 })
       

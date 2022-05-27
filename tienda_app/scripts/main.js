@@ -1,4 +1,4 @@
-//Declaración y captura de elementos html 
+//Declaración y captura de elementos html  
 // const carritoCompras = document.getElementById('carrito')
 const cards = document.querySelector('.contenedor-cards')
 const paginacion = document.querySelector('.paginacion')
@@ -9,6 +9,8 @@ const contenedorCarrito = document.querySelector('.contenedor-carrito')
 // const btnAnterior = document.querySelector('.btnAnterior')
 const btnCategorias = document.querySelector('#btn-categorias')
 const menuNavIzquierda = document.querySelector('.menunav_izquierda')
+const menuNavDerecha = document.querySelector('#menunav_derecha')
+const btnCarrito = menuNavDerecha.querySelector('button')
 
 
 /*Aqui capturamos el template (debemos colocar el ".content" 
@@ -119,11 +121,15 @@ const añadirCarrito = (e) => {
         
         crearCarrito(cardProducto);
         setTimeout(() => {
-            msgAñadido.classList.add('active')
+            msgAñadido.classList.add('active');
+            btnCarrito.classList.add('active');
         }, 500)
         setTimeout(() => {
             msgAñadido.classList.remove('active')
         }, 3000)
+        setTimeout(() => {
+            btnCarrito.classList.remove('active')
+        }, 5000)
     }
 
     e.stopPropagation()
@@ -199,7 +205,11 @@ let Api_URL = `${URLServer}/api/productos/pagina/`
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchData();
+    if (window.location.pathname === '/') {
+        fetchData();
+    } else {
+        fetchDataBusqueda();
+    }
     if(localStorage.numCarrito) {
         numCarrito = JSON.parse(localStorage.numCarrito)
         pintarNumCarrito(numCarrito.numero);
@@ -218,8 +228,32 @@ const fetchData = async () => {
         const data = await res.json()
         paginasTotales = data.totalPaginas
         //Llamos la función "pintarCards" y le damos los datos que nos pide, los cuales son los mismos que acabamos de capturar en la constante "data"
-        pintarCards(data.productos);
+        if (data.message === 'Success') {
+            pintarCards(data.productos);
+            paginacion.classList.add('active')
+        }
         
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const fetchDataBusqueda = async () => {
+    // console.log(window.location.pathname)
+    try {
+        const res = await fetch(`/api${window.location.pathname}`)
+        const data = await res.json()
+        console.log(data)
+        if (data.message === 'Success') {
+            pintarCards(data.productos);
+            if (data.productos.length === 1) {
+                cards.classList.add('column-1')
+            }
+        } else {
+            cards.innerHTML = `<h1>No se encontraron resultados</h1>`
+            cards.classList.add('column-1')
+        }
+        // paginacion.style.display = 'none'
     } catch (error) {
         console.log(error)
     }
@@ -229,12 +263,18 @@ const fetchDataCategoria = async (categoria) => {
     try {
         const res = await fetch(`${URLServer}/api/productos/categorias/${categoria}/${pagina}`)
         const data = await res.json()
-        if (data.message = 'Success') {
-            
+        console.log(data)
+        if (data.message === 'Success') {      
             pintarCards(data.productos);
             paginasTotales = data.totalPaginas
 
             categoriaActual = categoria
+            paginacion.classList.add('active')
+            if (data.productos.length === 1) {
+                cards.classList.add('column-1')
+            } else {
+                cards.classList.remove('column-1')
+            }
         }
 
     } catch (error) {
@@ -255,7 +295,8 @@ const pintarCards = data => {
         
         templateCard.querySelector('h4').textContent = producto.nombre
         // templateCard.querySelector('p').textContent = producto.descripcion
-        templateCard.querySelector('img').setAttribute("src", producto.imagen)
+        templateCard.querySelector('img').setAttribute("src", URLServer + "/" + producto.imagen)
+        templateCard.querySelector('img').setAttribute("loading", "lazy")
         // templateCard.querySelector('.detalles').textContent = producto.descripcion
         templateCard.querySelector('.precio').textContent = producto.precio
         templateCard.querySelector('.descripcion').textContent = producto.descripcion

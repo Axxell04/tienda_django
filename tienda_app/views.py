@@ -1,3 +1,4 @@
+import json
 from django import views
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
@@ -14,6 +15,10 @@ def inicio(request):
 def carrito(request):
 
     return render(request, 'paginas/carrito.html')
+
+def busqueda(request, PC=None, ID=None):
+    
+    return render(request, 'paginas/inicio.html')
 
 # def admin(request):
 

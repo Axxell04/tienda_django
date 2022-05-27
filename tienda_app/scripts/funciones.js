@@ -1,3 +1,7 @@
+const nav = document.querySelector('#navegacion')
+const btnBusqueda = document.querySelector('#btn-busqueda')
+const containerInputBusqueda = document.querySelector('.container-input-busqueda')
+
 const lengthNum = (num) => {
     return num.toString().length
 }
@@ -36,6 +40,32 @@ const pintarNav = () => {
         
     }
 }
+
+let iconoLupa = `<ion-icon name="search"></ion-icon>`
+let iconoEquis = `<ion-icon name="close-sharp"></ion-icon>`
+
+btnBusqueda.addEventListener('click', () => {
+    containerInputBusqueda.classList.toggle('active')
+    nav.classList.toggle('active')
+    if (btnBusqueda.dataset.icono === 'lupa') {
+        btnBusqueda.innerHTML = iconoEquis
+        btnBusqueda.setAttribute('data-icono', 'equis')
+        containerInputBusqueda.querySelector('input').value = ''
+        containerInputBusqueda.querySelector('input').focus()
+    } else {
+        btnBusqueda.innerHTML = iconoLupa
+        btnBusqueda.setAttribute('data-icono', 'lupa')
+        containerInputBusqueda.querySelector('input').value = ''
+        containerInputBusqueda.querySelector('input').blur()
+    }
+})
+
+containerInputBusqueda.querySelector('input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && containerInputBusqueda.querySelector('input').value !== '') {
+        datosBusqueda = containerInputBusqueda.querySelector('input').value
+        window.location.href = `/busqueda/${datosBusqueda}`
+    }
+})
 
 // import Hammer from "https://cdn.skypack.dev/hammerjs@2.0.8";
 // import hammer from 'https://cdn.skypack.dev/hammerjs';

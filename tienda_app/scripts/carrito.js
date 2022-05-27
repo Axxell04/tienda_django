@@ -66,7 +66,7 @@ const pintarCarrito = () => {
                 templateCarrito.querySelector('.colorC').textContent = producto.colores
                 templateCarrito.querySelector('.precioC').textContent = producto.precio + ' $'
                 templateCarrito.querySelector('.cantidadC').textContent = producto.cantidad
-                templateCarrito.querySelector('img').setAttribute("src", URLServer + producto.img)
+                templateCarrito.querySelector('img').setAttribute("src", producto.img)
                 templateCarrito.querySelector('.btnSumar').dataset.id = producto.id
                 templateCarrito.querySelector('.btnRestar').dataset.id = producto.id
 
@@ -86,9 +86,6 @@ const pintarCarrito = () => {
     pintarFooter();
     
 }
-
-
-let productoOpciones = document
 
 const btnAccion = e => {
     if (e.target.classList.contains('btnSumar')) {
@@ -127,6 +124,9 @@ const pintarFooter = () => {
 
     if (Object.keys(carrito).length === 0) {
         footer.innerHTML = `<h2> !!Carrito Vacío, vaya a inicio para agregar productos¡¡ </h2>`
+        footer.querySelector('h2').addEventListener('click', ()=>{
+            window.location.pathname = "/"
+        })
         footer.querySelector('h2').style.textAlign = 'center'
         footer.querySelector('h2').style.backgroundColor = 'white'
         footer.querySelector('h2').style.padding = '10px'

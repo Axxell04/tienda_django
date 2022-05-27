@@ -1,4 +1,3 @@
-import numbers
 import json
 
 from django.shortcuts import render
@@ -114,6 +113,41 @@ def pintar_productos_categorias(request, categoria='', pagina=0):
         return HttpResponseNotAllowed(['GET'])
     return JsonResponse(datos)
 
+def busqueda(request, PC=None, ID=None):
+    datos = {'message': "Error"}
+    if PC:
+        try:
+            querys = list(Producto.objects.filter(nombre__icontains=PC).values())
+            querys.extend(list(Producto.objects.filter(descripcion__icontains=PC).values()))
+            productos = []
+            for i in querys:
+                if i not in productos:
+                    productos.append(i)
+
+            print(len(productos))        
+    
+            if len(querys) > 0:
+                datos = {'message': "Success", 'productos': productos}
+                # print(querys)
+            else:
+                datos = {'message': "No se encontraron productos"}
+        except:
+            datos = {'message': "No se encontraron productos"}
+    
+        
+    elif ID:
+        try:
+            producto = list(Producto.objects.filter(id=ID).values())
+
+            datos = {'message': "Success", 'productos': producto}
+        except:
+            datos = {'message': "No se encontraron productos"}
+
+    else:
+        datos = {'message': "Error"}
+
+    print(datos)
+    return JsonResponse(datos)
 
 def realizar_pedido(request):
     if request.method == 'POST':
